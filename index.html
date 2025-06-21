@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年 夏至点 | ウケヒ宣言</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- html2canvas for downloading vow -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* Custom styles for typography and theme */
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #0a0a1a; /* Deep indigo background */
+            color: #e0e0e0; /* Off-white text */
+        }
+        .font-noto {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        /* Glassmorphism effect */
+        .glass-card {
+            background: rgba(16, 16, 32, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #fce588, #f5b041, #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #f5b041, #ff8c42);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.2);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.3);
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff8c42;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5b041;
+        }
+        /* Input styling */
+        .ukehi-input {
+            background-color: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .ukehi-input:focus {
+            outline: none;
+            border-color: #f5b041;
+            box-shadow: 0 0 15px rgba(245, 176, 65, 0.3);
+        }
+        /* Animation for sections appearing on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Background 3D Animation Canvas -->
+    <div id="canvas-container" class="fixed top-0 left-0 w-full h-full z-0"></div>
+
+    <div class="relative z-10">
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex flex-col items-center justify-center text-center p-4">
+            <h1 class="text-4xl md:text-6xl font-bold font-noto tracking-tight leading-tight">
+                <span class="gradient-text">2025年 夏至点</span><br>宇宙と繋がる、誓いの日
+            </h1>
+            <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
+                数十年に一度の宇宙的特異点。自らの手で、人生の流れを創造する瞬間が、今ここに。
+            </p>
+            <div id="countdown" class="mt-8 text-3xl md:text-5xl font-bold tracking-wider flex space-x-2 md:space-x-4">
+                <div class="glass-card p-3 md:p-4 rounded-lg"><span id="days">00</span><span class="block text-xs font-normal mt-1">日</span></div>
+                <div class="glass-card p-3 md:p-4 rounded-lg"><span id="hours">00</span><span class="block text-xs font-normal mt-1">時間</span></div>
+                <div class="glass-card p-3 md:p-4 rounded-lg"><span id="minutes">00</span><span class="block text-xs font-normal mt-1">分</span></div>
+                <div class="glass-card p-3 md:p-4 rounded-lg"><span id="seconds">00</span><span class="block text-xs font-normal mt-1">秒</span></div>
+            </div>
+            <button onclick="document.getElementById('moment').scrollIntoView({ behavior: 'smooth' })"
+                class="mt-12 px-8 py-4 text-lg font-bold text-white rounded-full btn-primary font-noto">
+                宣言の旅を始める
+            </button>
+        </section>
+
+        <!-- Section 2: The Cosmic Moment -->
+        <section id="moment" class="min-h-screen py-20 px-4 reveal">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text font-noto">宇宙的特異点</h2>
+                <p class="text-center mt-4 max-w-3xl mx-auto text-gray-300">2025年6月21日、日本標準時11時42分。太陽がその力を最大限に発揮する夏至と、一日の頂点である南中が、日本の象徴「皇居」の上空で重なる、奇跡の瞬間。</p>
+                <div class="mt-12 flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 h-80 md:h-96 rounded-2xl" id="globe-container">
+                        <!-- Interactive Globe will be rendered here -->
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold text-yellow-300">太陽の力</h3>
+                            <p class="mt-2 text-gray-300">一年で最も昼が長く、太陽エネルギーが地上に最大に降り注ぐ日。生命力と創造性の象徴です。</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold text-yellow-300">日本の中心</h3>
+                            <p class="mt-2 text-gray-300">太陽神の子孫とされる天皇の住まう皇居。この場所で起こる現象は、国全体、そして私たち一人ひとりにとって特別な意味を持ちます。</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold text-yellow-300">あなたの変革</h3>
+                            <p class="mt-2 text-gray-300">この宇宙的な調律の瞬間に意識を合わせることで、あなた自身の内なる力を目覚めさせ、人生の新たなステージへの扉を開きます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: The Ukehi Vow -->
+        <section id="ukehi" class="min-h-screen py-20 px-4 reveal">
+            <div class="container mx-auto max-w-3xl text-center">
+                <h2 class="text-3xl md:text-5xl font-bold gradient-text font-noto">ウケヒ | 誓いの宣言</h2>
+                <p class="mt-4 text-lg text-gray-300">「お願い」ではない。自らの意志で未来を創造する、神聖な「決意」の表明。それがウケヒです。</p>
+
+                <div id="ukehi-form" class="mt-12 glass-card p-6 md:p-10 rounded-2xl text-left space-y-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-yellow-300 font-noto">ステップ1：浄化 (禊)</h3>
+                        <p class="mt-2 text-gray-400">誓いの前に、心を静めましょう。神社での茅の輪くぐりや、静かな場所での深呼吸など、あなただけの儀式で心身を清めます。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-yellow-300 font-noto">ステップ2：誓いを立てる</h3>
+                        <p class="mt-2 text-gray-400">2025年12月22日(冬至)までに達成したい、本気の目標を「数値・期限付き」で3つ、ここに記してください。</p>
+                        <div class="mt-4 space-y-4">
+                            <input type="text" id="vow1" class="w-full p-3 rounded-lg ukehi-input" placeholder="例：副業で月収20万円を6ヶ月継続する">
+                            <input type="text" id="vow2" class="w-full p-3 rounded-lg ukehi-input" placeholder="例：AIの新スキルを1つ習得し、独立の第一歩を踏み出す">
+                            <input type="text" id="vow3" class="w-full p-3 rounded-lg ukehi-input" placeholder="例：週3回の筋トレを継続し、理想の体型になる">
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-bold text-yellow-300 font-noto">ステップ3：宣言する</h3>
+                        <p class="mt-2 text-gray-400">書き終えたら、下のボタンを押し、あなたの決意を宇宙に宣言します。この行為が、現実を動かす力となります。</p>
+                         <button id="declare-btn" onclick="declareVow()" class="mt-6 w-full px-8 py-4 text-lg font-bold text-white rounded-full btn-primary font-noto">
+                            宇宙に宣言する
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: The Commitment -->
+        <section id="commitment" class="min-h-screen py-20 px-4 hidden reveal">
+             <div class="container mx-auto max-w-3xl text-center">
+                 <h2 class="text-3xl md:text-5xl font-bold gradient-text font-noto">誓いを現実に</h2>
+                 <p class="mt-4 text-lg text-gray-300">宣言は始まりにすぎません。ここからの行動が、あなたの未来を形作ります。</p>
+
+                <div id="vow-card-container" class="mt-12">
+                  <!-- This will be populated by JS -->
+                  <div id="vow-card" class="glass-card p-8 rounded-2xl text-left border-2 border-yellow-400 shadow-lg shadow-yellow-400/20">
+                    <h3 class="text-2xl font-bold text-center text-yellow-300 font-noto mb-6">私のウケヒ宣言</h3>
+                    <ul class="space-y-4 list-none text-lg">
+                        <li id="vow-display-1" class="border-l-4 border-yellow-400 pl-4"></li>
+                        <li id="vow-display-2" class="border-l-4 border-yellow-400 pl-4"></li>
+                        <li id="vow-display-3" class="border-l-4 border-yellow-400 pl-4"></li>
+                    </ul>
+                    <p class="text-right mt-6 text-sm text-gray-400">2025年 夏至点</p>
+                  </div>
+                </div>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h4 class="text-lg font-bold text-yellow-300">1. 公に伝える</h4>
+                        <p class="mt-2 text-gray-400">SNSや家族、仲間へ宣言を共有しましょう。公のコミットメントが、あなたを後押しします。</p>
+                         <button onclick="shareVow()" class="mt-4 w-full md:w-auto px-4 py-2 text-sm font-bold text-white rounded-full btn-primary">
+                            SNSで共有する
+                        </button>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h4 class="text-lg font-bold text-yellow-300">2. 画像として保存</h4>
+                        <p class="mt-2 text-gray-400">あなたの誓いを美しい画像として保存し、いつでも見返せるようにしましょう。</p>
+                        <button onclick="downloadVow()" class="mt-4 w-full md:w-auto px-4 py-2 text-sm font-bold text-white rounded-full btn-primary">
+                           宣言書をダウンロード
+                        </button>
+                    </div>
+                     <div class="glass-card p-6 rounded-2xl col-span-1 md:col-span-2">
+                        <h4 class="text-lg font-bold text-yellow-300">3. 今日から始める</h4>
+                        <p class="mt-2 text-gray-400">壮大な目標も、最初の一歩から。今日、今すぐできる具体的な行動を1つだけ始めてください。それが現実を動かす原動力です。</p>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-12 px-4">
+            <p class="text-gray-500">&copy; 2025 Ukehi Declaration Project. All rights reserved.</p>
+        </footer>
+
+    </div>
+    
+    <!-- Modal for messages -->
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+        <div class="glass-card p-8 rounded-2xl max-w-sm w-full text-center">
+            <p id="modal-message" class="text-lg mb-6"></p>
+            <button onclick="document.getElementById('modal').classList.add('hidden')" class="px-6 py-2 text-md font-bold text-white rounded-full btn-primary">
+                閉じる
+            </button>
+        </div>
+    </div>
+
+
+<script>
+    // --- Countdown Timer ---
+    const countdownElement = document.getElementById('countdown');
+    if (countdownElement) {
+        const countDownDate = new Date("June 21, 2025 11:42:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                countdownElement.innerHTML = "<div class='text-2xl md:text-4xl font-bold'>その瞬間は訪れました</div>";
+            }
+        }, 1000);
+    }
+    
+    // --- Modal Function ---
+    function showModal(message) {
+        document.getElementById('modal-message').innerText = message;
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    // --- Ukehi Declaration Logic ---
+    let vows = [];
+    function declareVow() {
+        const vow1 = document.getElementById('vow1').value.trim();
+        const vow2 = document.getElementById('vow2').value.trim();
+        const vow3 = document.getElementById('vow3').value.trim();
+
+        if (!vow1 && !vow2 && !vow3) {
+            showModal('少なくとも1つの誓いを立ててください。');
+            return;
+        }
+
+        vows = [vow1, vow2, vow3].filter(v => v);
+
+        document.getElementById('vow-display-1').innerText = vow1 || '（未設定）';
+        document.getElementById('vow-display-2').innerText = vow2 || '（未設定）';
+        document.getElementById('vow-display-3').innerText = vow3 || '（未設定）';
+        
+        document.getElementById('ukehi').classList.add('hidden');
+        const commitmentSection = document.getElementById('commitment');
+        commitmentSection.classList.remove('hidden');
+        
+        // Ensure the reveal animation triggers after display: block
+        setTimeout(() => {
+            commitmentSection.classList.add('visible');
+            commitmentSection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        
+        showModal('宣言が宇宙に届けられました。あなたの誓いを現実のものにしましょう。');
+    }
+    
+    function shareVow() {
+        if (vows.length === 0) {
+            showModal('まず誓いを宣言してください。');
+            return;
+        }
+        const text = `私は2025年の夏至点に誓いました。\n\n私の誓い：\n- ${vows.join('\n- ')}\n\n#ウケヒ宣言 #2025夏至`;
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    }
+    
+    function downloadVow() {
+         if (vows.length === 0) {
+            showModal('まず誓いを宣言してください。');
+            return;
+        }
+        const card = document.getElementById('vow-card');
+        const originalStyles = {
+            backgroundColor: card.style.backgroundColor,
+            border: card.style.border
+        };
+
+        // Temporarily apply styles for better image quality
+        card.style.backgroundColor = '#0a0a1a'; // Match body background
+        card.style.border = '2px solid #fce588';
+
+        html2canvas(card, {
+          backgroundColor: '#0a0a1a',
+          useCORS: true,
+          scale: 2 // Higher resolution
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'ukehi-declaration-2025.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+            // Revert styles
+            card.style.backgroundColor = originalStyles.backgroundColor;
+            card.style.border = originalStyles.border;
+        });
+    }
+
+    // --- Background 3D Animation ---
+    let scene, camera, renderer, particles;
+    const canvasContainer = document.getElementById('canvas-container');
+
+    function init3D() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        canvasContainer.appendChild(renderer.domElement);
+
+        const particleCount = 5000;
+        const particlesGeometry = new THREE.BufferGeometry();
+        const posArray = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: 0xff8c42
+        });
+        particles = new THREE.Points(particlesGeometry, particleMaterial);
+        scene.add(particles);
+
+        camera.position.z = 5;
+    }
+
+    function animate3D() {
+        requestAnimationFrame(animate3D);
+        particles.rotation.y += 0.0001;
+        particles.rotation.x += 0.0002;
+        renderer.render(scene, camera);
+    }
+    
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    window.addEventListener('resize', onWindowResize, false);
+    
+    init3D();
+    animate3D();
+
+
+    // --- Interactive Globe ---
+    let globe, globeRenderer, globeCamera, globeScene, sunLight;
+    const globeContainer = document.getElementById('globe-container');
+    
+    function initGlobe() {
+        globeScene = new THREE.Scene();
+        
+        globeCamera = new THREE.PerspectiveCamera(45, globeContainer.clientWidth / globeContainer.clientHeight, 1, 1000);
+        globeCamera.position.set(0, 0, 10);
+        
+        globeRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        globeRenderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+        globeRenderer.setPixelRatio(window.devicePixelRatio);
+        globeContainer.appendChild(globeRenderer.domElement);
+
+        // Earth
+        const geometry = new THREE.SphereGeometry(3, 32, 32);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0x4d6cfa,
+            shininess: 5
+        });
+        globe = new THREE.Mesh(geometry, material);
+        globeScene.add(globe);
+        
+        // Tokyo marker
+        const markerGeo = new THREE.SphereGeometry(0.08, 16, 16);
+        const markerMat = new THREE.MeshBasicMaterial({ color: 0xffdd00 });
+        const marker = new THREE.Mesh(markerGeo, markerMat);
+        
+        // Convert lat/lon to 3D coordinates
+        const lat = 35.6895; // Tokyo latitude
+        const lon = 139.6917; // Tokyo longitude
+        const radius = 3;
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lon + 180) * (Math.PI / 180);
+        marker.position.x = -(radius * Math.sin(phi) * Math.cos(theta));
+        marker.position.y = radius * Math.cos(phi);
+        marker.position.z = radius * Math.sin(phi) * Math.sin(theta);
+        globe.add(marker);
+        
+        // Rotate globe to show Tokyo
+        globe.rotation.y = -Math.PI * 1.5;
+
+        // Lighting
+        globeScene.add(new THREE.AmbientLight(0xcccccc, 0.4));
+        sunLight = new THREE.DirectionalLight(0xffffff, 1);
+        sunLight.position.set(5, 3, 5);
+        globeScene.add(sunLight);
+    }
+
+    function animateGlobe() {
+        requestAnimationFrame(animateGlobe);
+        globe.rotation.y += 0.001;
+        globeRenderer.render(globeScene, globeCamera);
+    }
+
+    if(globeContainer) {
+      initGlobe();
+      animateGlobe();
+    }
+
+
+    // --- Scroll Reveal Animation ---
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+</script>
+</body>
+</html>
