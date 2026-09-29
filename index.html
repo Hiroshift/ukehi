@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- register: 作品固有の世界観（和紙・朱の太陽・明朝）＝本人「デザインは自由に」 -->
 <style>
 :root{
   --paper:#f3ede2; --sheet:#fbf8f2; --ink:#1c1813; --sub:#5d554a; --faint:#958b7c; --line:#ddd3c2;
@@ -46,10 +47,19 @@ h1,h2,h3,p,li{word-break:auto-phrase;text-wrap:pretty}
 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
 .mincho{font-family:var(--mincho)}
 
-/* hero */
-.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:48px 0 40px;position:relative}
-.sun{width:min(46vw,210px);aspect-ratio:1;border-radius:50%;background:var(--shu);margin:0 auto 36px;position:relative}
-.sun::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid var(--shu);opacity:.35}
+/* hero：今の時刻の空 */
+.hero{min-height:100svh;display:grid;grid-template-rows:minmax(300px,52svh) auto;text-align:center}
+.sky{position:relative;overflow:hidden;background:linear-gradient(to bottom,var(--sky1,#bcd6ea),var(--sky2,#f3ede2));transition:background 1s}
+.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);opacity:.5}
+.sun-path{position:absolute;left:6%;right:6%;bottom:-1px;height:var(--arc-h,70%);border:1px dashed var(--path,rgba(28,24,19,.18));border-bottom:0;border-radius:50% 50% 0 0/100% 100% 0 0}
+.hero-sun{position:absolute;width:clamp(64px,16vw,104px);aspect-ratio:1;border-radius:50%;background:var(--shu);
+  left:var(--sx,50%);bottom:var(--sy,40%);transform:translate(-50%,50%);box-shadow:0 0 0 14px color-mix(in srgb,var(--shu) 14%,transparent)}
+.moon{position:absolute;right:16%;top:22%;width:38px;height:38px;border-radius:50%;box-shadow:-9px 5px 0 0 #efe6cf;display:none}
+.is-night .moon{display:block}.is-night .hero-sun{display:none}
+.sky-time{position:absolute;left:20px;top:18px;font-size:12px;letter-spacing:.2em;color:var(--sky-ink,var(--sub));text-align:left}
+.ground{background:var(--paper);padding:40px 0 56px}
+/* hero(旧) */
+
 .kicker{font-size:12px;letter-spacing:.4em;color:var(--faint);margin-bottom:14px}
 .hero h1{font-family:var(--mincho);font-weight:800;font-size:clamp(34px,8vw,56px);line-height:1.3;letter-spacing:.06em}
 .hero .next{margin-top:18px;font-family:var(--mincho);font-size:17px;color:var(--sub)}
@@ -65,7 +75,8 @@ a.btn{text-decoration:none}
 .btn.shu{background:var(--shu);color:#fff}
 .btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
 .btn.line:hover{box-shadow:inset 0 0 0 1px var(--ink);opacity:1}
-.hero .btn{margin-top:36px}
+.hero .btn{margin-top:30px}
+.hero h1{margin-top:2px}
 
 /* sections */
 section.block{padding:88px 0;border-top:1px solid var(--line)}
@@ -138,19 +149,26 @@ footer a{color:inherit}
 </style>
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <div class="sun" aria-hidden="true"></div>
-    <p class="kicker">UKEHI</p>
-    <h1>ウケヒ宣言</h1>
-    <p class="next">次の節目は <b id="next-name">—</b><br><span id="next-date">—</span></p>
-    <div class="count" id="countdown" aria-live="off">
-      <div><span id="days">--</span><small>日</small></div>
-      <div><span id="hours">--</span><small>時間</small></div>
-      <div><span id="minutes">--</span><small>分</small></div>
-      <div><span id="seconds">--</span><small>秒</small></div>
+<header class="hero" id="hero">
+  <div class="sky" aria-hidden="true">
+    <div class="sun-path"></div>
+    <div class="hero-sun" id="hero-sun"></div>
+    <div class="moon" id="moon"></div>
+    <p class="sky-time" id="sky-time"></p>
+  </div>
+  <div class="ground">
+    <div class="wrap">
+      <p class="kicker">UKEHI</p>
+      <h1>ウケヒ宣言</h1>
+      <p class="next">次の節目は <b id="next-name">—</b><br><span id="next-date">—</span></p>
+      <div class="count" id="countdown" aria-live="off">
+        <div><span id="days">--</span><small>日</small></div>
+        <div><span id="hours">--</span><small>時間</small></div>
+        <div><span id="minutes">--</span><small>分</small></div>
+        <div><span id="seconds">--</span><small>秒</small></div>
+      </div>
+      <a class="btn" href="#ukehi" id="start-link">誓いを立てる</a>
     </div>
-    <a class="btn" href="#ukehi" id="start-link">誓いを立てる</a>
   </div>
 </header>
 
@@ -282,6 +300,41 @@ footer a{color:inherit}
     $('arc-sun').setAttribute('cy', (160 - 140 * Math.sin(a)).toFixed(1));
     $('arc-pct').textContent = Math.floor(p * 100) + '%';
   }
+  // 空：日本時間の時刻で色と太陽の位置、季節で南中の高さを変える
+  const SKIES = [
+    [0, '#0e1430','#232b52','rgba(239,230,207,.75)','rgba(239,230,207,.18)',1],
+    [4.5,'#3b4a86','#f0a98c','rgba(255,248,235,.85)','rgba(255,248,235,.25)',0],
+    [6.5,'#9fc3e2','#f6e6cf','#5d554a','rgba(28,24,19,.18)',0],
+    [15.5,'#a9c6df','#f3e3c8','#5d554a','rgba(28,24,19,.18)',0],
+    [17,'#5a4f86','#f09a6a','rgba(255,248,235,.85)','rgba(255,248,235,.25)',0],
+    [19,'#0e1430','#232b52','rgba(239,230,207,.75)','rgba(239,230,207,.18)',1],
+  ];
+  function paintSky() {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Asia/Tokyo', hour:'2-digit', minute:'2-digit', hourCycle:'h23' }).formatToParts(now);
+    let H = +parts.find(p => p.type === 'hour').value, M = +parts.find(p => p.type === 'minute').value;
+    const q = new URLSearchParams(location.search).get('t'); // 見本用：?t=05:30 でその時刻の空
+    if (q && /^\d{1,2}:\d{2}$/.test(q)) { [H, M] = q.split(':').map(Number); }
+    const h = H + M / 60;
+    // 季節：夏至で1、冬至で0
+    const start = Date.UTC(now.getUTCFullYear(), 0, 0), doy = (now - start) / 864e5;
+    const season = (1 + Math.cos(2 * Math.PI * (doy - 172) / 365.25)) / 2;
+    const rise = 5.6 - 2.4 * (season - .5), set = 17.6 + 2.4 * (season - .5); // 東京：夏至4:25/19:00・冬至6:47/16:30に近似
+    const phase = h < rise - 1 || h >= set + 1 ? 0 : h < rise + 1 ? 1 : h < set - 1.2 ? 2 : 4;
+    const k = SKIES[phase];
+    const sky = document.querySelector('.sky'), hero = $('hero');
+    sky.style.setProperty('--sky1', k[1]); sky.style.setProperty('--sky2', k[2]);
+    sky.style.setProperty('--sky-ink', k[3]); sky.style.setProperty('--path', k[4]);
+    hero.classList.toggle('is-night', !!k[5]);
+    const peak = 38 + 44 * season; // 空の高さに対する南中の%
+    sky.style.setProperty('--arc-h', peak + '%');
+    const t = Math.min(1, Math.max(0, (h - rise) / (set - rise)));
+    const day = h > rise && h < set;
+    $('hero-sun').style.setProperty('--sx', (6 + 88 * t) + '%');
+    $('hero-sun').style.setProperty('--sy', (day ? peak * Math.sin(Math.PI * t) : -20) + '%');
+    $('sky-time').textContent = `東京 ${String(H).padStart(2,'0')}:${String(M).padStart(2,'0')}`;
+  }
+  paintSky(); setInterval(paintSky, 60000);
   paintNodes(); tick(); setInterval(tick, 1000);
 
   // 宣言書
